@@ -8,3 +8,9 @@ class HomeView(View):
     return JsonResponse(
       {"message": "Server running............."}
     )
+    
+class TestView(View):
+  def get(self , request):
+    return JsonResponse({
+      "message": "this is a test route."
+    })
