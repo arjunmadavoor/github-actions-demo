@@ -1,4 +1,3 @@
 # github-actions-demo
 Hello World
-I am dilnavas
-Maneesha
+This is a testing of github actions
