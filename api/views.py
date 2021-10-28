@@ -6,7 +6,7 @@ from django.views import View
 class HomeView(View):
   def get(self,request):
     return JsonResponse(
-      {"message": "Server running............."}
+      {"message": "Hello World............."}
     )
     
 class TestView(View):
