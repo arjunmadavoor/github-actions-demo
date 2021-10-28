@@ -12,5 +12,5 @@ class HomeView(View):
 class TestView(View):
   def get(self , request):
     return JsonResponse({
-      "message": "this is a test route."
+      "message": "this is a second route."
     })
