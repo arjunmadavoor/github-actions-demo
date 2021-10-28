@@ -40,4 +40,4 @@ jobs:
         name: Build
         url: ${{ secrets.GOOGLE_CHAT }}
         status: ${{ job.status }}
-        if: always()
+      if: always()
