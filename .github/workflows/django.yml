@@ -34,3 +34,10 @@ jobs:
 #         git remote add heroku https://heroku:${{secrets.HEROKU_SECRET_KEY}}@git.heroku.com/djangoaction.git
     - name: Deploy!
       run: git push heroku master -f
+    - name: Google Chat Notification
+      uses: Co-qn/google-chat-notification@releases/v1
+      with:
+        name: Build
+        url: ${{ secrets.GOOGLE_CHAT }}
+        status: ${{ job.status }}
+        if: always()
