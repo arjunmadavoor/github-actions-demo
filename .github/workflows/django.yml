@@ -42,4 +42,7 @@ jobs:
         name: Build
         url: ${{ secrets.GOOGLE_CHAT }}
         status: ${{ job.status }}
+        project: ${{ github.repository }}
+        branch: ${{ github.ref }}
+        user: ${{github.user}}
       if: always()
