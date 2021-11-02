@@ -32,6 +32,12 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
         
+    - name: Caching Dependency 
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: ${{ hashFiles('requirements.txt') }}
+        
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
@@ -44,6 +50,10 @@ jobs:
     needs: build
     steps:
     - name: Run Tests
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: ${{ hashFiles('requirements.txt') }}
     - run: |
         python3 manage.py test
         
