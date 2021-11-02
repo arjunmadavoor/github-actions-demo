@@ -50,10 +50,10 @@ jobs:
     needs: build
     steps:
     - name: Run Tests
-      uses: actions/cache@v2
-      with:
-        path: ~/.cache/pip
-        key: ${{ hashFiles('requirements.txt') }}
+#       uses: actions/cache@v2
+#       with:
+#         path: ~/.cache/pip
+#         key: ${{ hashFiles('requirements.txt') }}
     - run: |
         python3 manage.py test
         
