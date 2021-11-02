@@ -57,10 +57,10 @@ jobs:
 #       if: github.ref == 'ref/heads/master' && job.status == 'success'
       run: git push heroku master -f
       
-#     - name: Google Chat Notification
-#       uses: Co-qn/google-chat-notification@releases/v1
-#       with:
-#         name: Build
-#         url: ${{ secrets.GOOGLE_CHAT }}
-#         status: ${{ job.status }}
-#       if: always()
+    - name: Google Chat Notification
+      uses: Co-qn/google-chat-notification@releases/v1
+      with:
+        name: Build
+        url: ${{ secrets.GOOGLE_CHAT }}
+        status: ${{ job.status }}
+      if: always()
