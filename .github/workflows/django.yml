@@ -50,11 +50,17 @@ jobs:
     - name: Run Tests
     - run: |
         python3 manage.py test
+        
+  deploy:
+    runs-on: self-hosted
+    needs: build
+    steps:
     - name: Add remote heroku repo & Deploy!
 #       run: |
 #       git remote add heroku https://heroku:${{secrets.HEROKU_SECRET_KEY}}@git.heroku.com/djangoaction.git
 #       if: github.ref == 'ref/heads/master' && job.status == 'success'
       run: git push heroku master -f
+      
     - name: Google Chat Notification
       uses: Co-qn/google-chat-notification@releases/v1
       with:
