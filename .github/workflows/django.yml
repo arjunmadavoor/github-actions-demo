@@ -43,12 +43,20 @@ jobs:
         pip install -r requirements.txt
         python3 manage.py makemigrations
         python3 manage.py migrate
-#   test:
-#     runs-on: self-hosted
-#     needs: build
-#     steps:
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: homework
+  test:
+    runs-on: self-hosted
+    needs: build
+    steps:
+    - name: Download math result for job 1
+      uses: actions/download-artifact@v2
+      with:
+          name: homework
     - name: Run Tests
-      run: python3 manage.py test
+    - run: python3 manage.py test
         
   deploy:
     runs-on: self-hosted
