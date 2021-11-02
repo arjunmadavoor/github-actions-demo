@@ -55,7 +55,7 @@ jobs:
         
   deploy:
     runs-on: self-hosted
-    needs: build
+    needs: [build, test]
     steps:
     - name: Add remote heroku repo & Deploy!
 #       run: |
