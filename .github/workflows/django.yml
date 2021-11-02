@@ -17,7 +17,6 @@ on:
 
 jobs:
   build:
-
     runs-on: self-hosted
     strategy:
 #       fail-fast: false
@@ -44,8 +43,12 @@ jobs:
         pip install -r requirements.txt
         python3 manage.py makemigrations
         python3 manage.py migrate
+  test:
+    runs-on: self-hosted
+    needs: build
+    steps:
     - name: Run Tests
-      run: |
+    - run: |
         python3 manage.py test
     - name: Add remote heroku repo & Deploy!
 #       run: |
