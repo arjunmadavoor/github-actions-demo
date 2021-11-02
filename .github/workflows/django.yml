@@ -32,11 +32,11 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
         
-    - name: Caching Dependency 
-      uses: actions/cache@v2
-      with:
-        path: ~/.cache/pip
-        key: ${{ hashFiles('requirements.txt') }}
+#     - name: Caching Dependency 
+#       uses: actions/cache@v2
+#       with:
+#         path: ~/.cache/pip
+#         key: ${{ hashFiles('requirements.txt') }}
         
     - name: Install Dependencies
       run: |
