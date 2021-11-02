@@ -47,8 +47,11 @@ jobs:
     needs: build
     steps:
     - name: Run Tests
-      if: steps.cache.outputs.cache-hit != 'true'
-      run: |
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: ${{ hashFiles('requirements.txt') }}
+    - run: |
         python3 manage.py makemigrations
         python3 manage.py migrate
         python3 manage.py test
