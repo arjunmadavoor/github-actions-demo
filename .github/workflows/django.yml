@@ -39,6 +39,11 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
         
+    - name: Create Virtual env
+      run: |
+        mkdir test-env && cd test-env
+        python3 -m venv action_env
+        source action_env/bin/activate
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
