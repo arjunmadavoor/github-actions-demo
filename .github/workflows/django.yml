@@ -58,9 +58,11 @@ jobs:
     runs-on: self-hosted
     needs: [build]
     steps:
+    - name: start env
+      run: workon django_env
+      shell: bash
     - name: Run Tests
       run: |
-        workon django_env
         python3 manage.py test
         
   deploy:
