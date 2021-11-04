@@ -1,4 +1,4 @@
-name: Django CI
+name: Django CI CD
 
 on:
   push:
@@ -49,12 +49,13 @@ jobs:
     runs-on: self-hosted
     needs: build
     steps:
-    - name: Run Tests
+    - name: Cache Depenedecy
       uses: actions/cache@v2
       with:
         path: ~/.cache/pip
         key: ${{ hashFiles('requirements.txt') }}
-    - run: |
+    - name: Run Tests
+      run: |
         python3 manage.py test
         
   deploy:
@@ -67,6 +68,10 @@ jobs:
 #       if: github.ref == 'ref/heads/master' && job.status == 'success'
       run: git push heroku master -f
       
+  Setup-Notification:
+    runs-on: self-hosted
+    needs: [build, test]
+    steps:
     - name: Google Chat Notification
       uses: Co-qn/google-chat-notification@releases/v1
       with:
