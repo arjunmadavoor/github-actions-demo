@@ -41,7 +41,8 @@ jobs:
         
     - name: Create Virtual env
       run: |
-        mkdir test-env && cd test-env
+        mkdir test-env
+        cd test-env
         python3 -m venv action_env
         source action_env/bin/activate
     - name: Install Dependencies
@@ -57,6 +58,7 @@ jobs:
     steps:
     - name: Run Tests
       run: |
+        cd test-env
         source action_env/bin/activate
         python3 manage.py test
         
