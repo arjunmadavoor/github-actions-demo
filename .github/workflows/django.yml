@@ -13,9 +13,17 @@ on:
         required: true
         default: 'warning'
       tags:
-        description: 'Test scenario tags'  
+        description: 'Test scenario tags'         
 
 jobs:
+  Cache:
+    runs-on: self-hosted
+    steps:
+    - name: Cache Depenedecy
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: ${{ hashFiles('requirements.txt') }}
   build:
     runs-on: self-hosted
     strategy:
@@ -49,11 +57,6 @@ jobs:
     runs-on: self-hosted
     needs: build
     steps:
-    - name: Cache Depenedecy
-      uses: actions/cache@v2
-      with:
-        path: ~/.cache/pip
-        key: ${{ hashFiles('requirements.txt') }}
     - name: Run Tests
       run: |
         python3 manage.py test
