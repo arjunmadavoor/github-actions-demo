@@ -26,17 +26,19 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    
+    - name: Cache Depenedecy
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: ${{ hashFiles('requirements.txt') }}
+        
     - run: git fetch --prune --unshallow
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
         
-    - name: Cache Depenedecy
-      uses: actions/cache@v2
-      with:
-        path: ~/.cache/pip
-        key: ${{ hashFiles('requirements.txt') }}
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
