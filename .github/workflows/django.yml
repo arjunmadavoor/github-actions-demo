@@ -37,13 +37,13 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }
         
-    - name: Setup Virtual Env
-      run: |
-        sudo pip install virtualenv
-        mkdir ~/.virtualenvs
-        sudo pip install virtualenvwrapper
-        mkvirtualenv cicd_env
-        workon cicd_env
+#     - name: Setup Virtual Env
+#       run: |
+#         sudo pip install virtualenv
+#         mkdir ~/.virtualenvs
+#         sudo pip install virtualenvwrapper
+#         mkvirtualenv cicd_env
+#         workon cicd_env
         
     - name: Install Dependencies
       run: |
