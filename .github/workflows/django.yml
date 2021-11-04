@@ -56,7 +56,9 @@ jobs:
     needs: [build]
     steps:
     - name: Run Tests
-      run: python3 manage.py test
+      run: |
+        source action_env/bin/activate
+        python3 manage.py test
         
   deploy:
     runs-on: self-hosted
