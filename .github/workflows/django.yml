@@ -16,14 +16,14 @@ on:
         description: 'Test scenario tags'         
 
 jobs:
-  Cache:
-    runs-on: self-hosted
-    steps:
-    - name: Cache Depenedecy
-      uses: actions/cache@v2
-      with:
-        path: ~/.cache/pip
-        key: ${{ hashFiles('requirements.txt') }}
+#   Cache:
+#     runs-on: self-hosted
+#     steps:
+#     - name: Cache Depenedecy
+#       uses: actions/cache@v2
+#       with:
+#         path: ~/.cache/pip
+#         key: ${{ hashFiles('requirements.txt') }}
   build:
     runs-on: self-hosted
     strategy:
@@ -33,18 +33,17 @@ jobs:
         python-version: [3.8.10]
 
     steps:
+    - name: Cache Depenedecy
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: ${{ hashFiles('requirements.txt') }}
     - uses: actions/checkout@v2
     - run: git fetch --prune --unshallow
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
-        
-#     - name: Caching Dependency 
-#       uses: actions/cache@v2
-#       with:
-#         path: ~/.cache/pip
-#         key: ${{ hashFiles('requirements.txt') }}
         
     - name: Install Dependencies
       run: |
