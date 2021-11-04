@@ -60,6 +60,7 @@ jobs:
     steps:
     - name: Run Tests
       run: |
+        workon django_env
         python3 manage.py test
         
   deploy:
