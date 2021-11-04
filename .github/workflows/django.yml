@@ -39,6 +39,7 @@ jobs:
         
     - name: Setup Virtual Env
       run: |
+        pip install virtualenvwrapper
         mkvirtualenv cicd_env
         workon cicd_env
         
