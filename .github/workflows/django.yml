@@ -25,22 +25,19 @@ jobs:
 #         path: ~/.cache/pip
 #         key: ${{ hashFiles('requirements.txt') }}
   
-  create-virtualenv:
-    runs-on: self-hosted
-    steps:
-    - name: Setup Virtual Env
-    - uses: actions/checkout@v1
-    - uses: actions/setup-python@v2
-    - run: |
-        sudo pip install virtualenv
-        mkdir ~/.virtualenvs
-        sudo pip install virtualenvwrapper
-        mkvirtualenv cicd_env
-        workon cicd_env
+#   create-virtualenv:
+#     runs-on: self-hosted
+#     steps:
+#     - name: Setup Virtual Env
+#       run: |
+#         sudo pip install virtualenv
+#         mkdir ~/.virtualenvs
+#         sudo pip install virtualenvwrapper
+#         mkvirtualenv cicd_env
+#         workon cicd_env
         
   build: 
     runs-on: self-hosted
-    needs: create-virtualenv
     strategy:
 #       fail-fast: false
       max-parallel: 4
@@ -59,7 +56,15 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }
-  
+        
+    - name: Setup Virtual Env
+      run: |
+        sudo pip install virtualenv
+        mkdir ~/.virtualenvs
+        sudo pip install virtualenvwrapper
+        mkvirtualenv cicd_env
+        workon cicd_env
+        
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
@@ -69,7 +74,7 @@ jobs:
         
   test:
     runs-on: self-hosted
-    needs: [build, create-virtualenv]
+    needs: [build]
     steps:
     - name: Run Tests
       run: |
@@ -77,7 +82,7 @@ jobs:
         
   deploy:
     runs-on: self-hosted
-    needs: [create-virtualenv, build, test]
+    needs: [build, test]
     steps:
     - name: Add remote heroku repo & Deploy!
 #       run: |
@@ -87,7 +92,7 @@ jobs:
       
   Setup-Notification:
     runs-on: self-hosted
-    needs: [create-virtualenv, build, test, deploy]
+    needs: [build, test, deploy]
     steps:
     - name: Google Chat Notification
       uses: Co-qn/google-chat-notification@releases/v1
