@@ -27,24 +27,31 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: Cache Depenedecy
-      uses: actions/cache@v2
-      with:
-        path: ~/.cache/pip
-        key: ${{ hashFiles('requirements.txt') }}
+#     - name: Cache Depenedecy
+#       uses: actions/cache@v2
+#       with:
+#         path: ~/.cache/pip
+#         key: ${{ hashFiles('requirements.txt') }}
         
     - run: git fetch --prune --unshallow
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
+    - name: Create env
+      run: |
+        sudo apt install python3-venv
+        mkdir actionenv
+        cd actionenv
+        /usr/bin/python3.8 -m venv venv
+        source venv/bin/activate
         
-    - uses: syphar/restore-virtualenv@v1
-      id: cache-virtualenv
-      with:
-        requirement_files: requirements.txt
-    - uses: syphar/restore-pip-download-cache@v1
-      if: steps.cache-virtualenv.outputs.cache-hit != 'true'
+#     - uses: syphar/restore-virtualenv@v1
+#       id: cache-virtualenv
+#       with:
+#         requirement_files: requirements.txt
+#     - uses: syphar/restore-pip-download-cache@v1
+#       if: steps.cache-virtualenv.outputs.cache-hit != 'true'
       
     - name: Install Dependencies
       run: |
@@ -58,8 +65,8 @@ jobs:
     needs: [build]
     steps:
     - uses: actions/setup-python@v2
-    - uses: syphar/restore-virtualenv@v1
-      id: cache-virtualenv
+#     - uses: syphar/restore-virtualenv@v1
+#       id: cache-virtualenv
     - name: Run Tests
       run: |
         python3 manage.py test
