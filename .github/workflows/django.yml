@@ -42,7 +42,11 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get -y install python3-venv
+        ls -a
+        mkdir actionenv
         cd actionenv
+        /usr/bin/python3.8 -m venv venv
+        ls -a
         source venv/bin/activate
         cd ..
         ls -a
