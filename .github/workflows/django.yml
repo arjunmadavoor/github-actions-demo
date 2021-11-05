@@ -46,6 +46,7 @@ jobs:
         cd actionenv
         /usr/bin/python3.8 -m venv venv
         source venv/bin/activate
+        deactivate
         
 #     - uses: syphar/restore-virtualenv@v1
 #       id: cache-virtualenv
