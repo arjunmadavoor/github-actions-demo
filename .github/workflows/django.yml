@@ -46,7 +46,6 @@ jobs:
         cd actionenv
         /usr/bin/python3.8 -m venv venv
         source venv/bin/activate
-        deactivate
         
 #     - uses: syphar/restore-virtualenv@v1
 #       id: cache-virtualenv
@@ -71,6 +70,8 @@ jobs:
 #       id: cache-virtualenv
     - name: Run Tests
       run: |
+        cd actionenv
+        source venv/bin/activate
         python3 manage.py test
         
   deploy:
