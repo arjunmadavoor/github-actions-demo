@@ -57,6 +57,7 @@ jobs:
     runs-on: self-hosted
     needs: [build]
     steps:
+    - uses: actions/setup-python@v2
     - uses: syphar/restore-virtualenv@v1
       id: cache-virtualenv
     - name: Run Tests
