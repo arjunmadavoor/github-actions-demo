@@ -71,7 +71,7 @@ jobs:
     - name: Run Tests
       run: |
         ls -a
-        source venv/bin/activate
+        source actionenv/venv/bin/activate
         python3 manage.py test
         
   deploy:
