@@ -1,6 +1,6 @@
 # github-actions-demo
 
-[![Django CICD Actions Status](https://github.com/arjunmdr/github-action-demo/workflows/Django CICD/badge.svg)](https://github.com/arjunmdr/github-action-demo/actions)
+[![Django-master Actions Status](https://github.com/arjunmdr/github-action-demo/workflows/django/badge.svg)](https://github.com/arjunmdr/github-action-demo/actions)
 
 Hello World
 This is a testing of github actions
