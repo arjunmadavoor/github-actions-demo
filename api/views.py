@@ -5,9 +5,7 @@ from django.views import View
 
 class HomeView(View):
   def get(self,request):
-    return JsonResponse(
-      {"message": "Yahhh it's working............."}
-    )
+    return render(request,'Index/index.html')
     
 class TestView(View):
   def get(self , request):
