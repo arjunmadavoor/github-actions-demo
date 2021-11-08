@@ -33,8 +33,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Create Virtual env
         run: |
-          sudo apt-get update
-          sudo apt-get -y install python3-venv
+
           mkdir actionenv
           cd actionenv
           /usr/bin/python3.8 -m venv venv
@@ -43,7 +42,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip freeze
-
+#        sudo apt-get update
+#         sudo apt-get -y install python3-venv
       - name: Django Commands
         run: |
           python3 manage.py makemigrations
