@@ -67,8 +67,7 @@ jobs:
         #       run: |
         #       git remote add heroku https://heroku:${{secrets.HEROKU_SECRET_KEY}}@git.heroku.com/djangoaction.git
         run: |
-          heroku repo:reset -a djangoaction
-          git push heroku development -f
+          git push heroku master -f
 
   Setup-Notification:
     runs-on: self-hosted
