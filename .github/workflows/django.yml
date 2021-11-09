@@ -2,7 +2,7 @@ name: Django CI CD
 
 on:
   push:
-    branches: [development, master]
+    branches: [development]
   pull_request:
     branches: [development]
 
