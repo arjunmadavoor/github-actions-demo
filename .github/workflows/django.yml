@@ -2,7 +2,7 @@ name: Django CI CD
 
 on:
   push:
-    branches: [development]
+    branches: [master]
   pull_request:
     branches: [development]
 
@@ -21,9 +21,9 @@ jobs:
     runs-on: self-hosted
     strategy:
       #   fail-fast: false
-      max-parallel: 4
+      max-parallel: 3
       matrix:
-        python-version: [3.8]
+        python-version: [3.7,3.8,3.9]
 
     steps:
       - uses: actions/checkout@v2
