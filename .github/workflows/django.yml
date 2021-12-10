@@ -1,20 +1,12 @@
-name: Django CI CD
+name: Master
 
 on:
   push:
     branches: [master]
-  pull_request:
-    branches: [development]
 
-  workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'
-        required: true
-        default: 'warning'
-      tags:
-        description: 'Test scenario tags'
-        required: false
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -66,13 +58,13 @@ jobs:
         run: |
           git commit -m "update"
           git push heroku master -f
-  Setup-Notification:
-    runs-on: self-hosted
-    needs: [build, test, deploy]
-    steps:
-      - name: Google Chat Notification
-        uses: Co-qn/google-chat-notification@releases/v1
-        with:
-          name: Build
-          url: ${{ secrets.GOOGLE_CHAT }}
-          status: ${{ job.status }}
+#   Setup-Notification:
+#     runs-on: self-hosted
+#     needs: [build, test, deploy]
+#     steps:
+#       - name: Google Chat Notification
+#         uses: Co-qn/google-chat-notification@releases/v1
+#         with:
+#           name: Build
+#           url: ${{ secrets.GOOGLE_CHAT }}
+#           status: ${{ job.status }}
